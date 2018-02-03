@@ -2,33 +2,50 @@
   "name": "easy-log",
   "version": "1.0.0",
   "description": "Easy and pluggable logger",
-  "main": "index.js",
+  "main": "src/index.js",
   "repository": "https://github.com/ematipico/easy-log.git",
   "author": "Emanuele Stoppa <my.burning@gmail.com>",
   "license": "MIT",
   "private": false,
+  "scripts": {
+    "build:commonjs": "cross-env NODE_ENV=cjs rollup -c -o lib/easy-log.js",
+    "build:es": "cross-env BABEL_ENV=es NODE_ENV=es rollup -c -o es/easy-log.js",
+    "build:umd": "cross-env BABEL_ENV=es NODE_ENV=development rollup -c -o dist/easy-log.js",
+    "build:umd:min": "cross-env BABEL_ENV=es NODE_ENV=production rollup -c -o dist/easy-log.min.js",
+    "build": "npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:umd:min",
+    "test": "cross-env BABEL_ENV=commonjs jest",
+    "test:cov": "yarn test --coverage"
+  },
   "devDependencies": {
+    "@babel/core": "^7.0.0-beta.39",
     "babel-eslint": "^8.2.1",
     "babel-jest": "^22.1.0",
+    "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-env": "^1.6.1",
     "cross-env": "^5.1.3",
     "eslint": "^4.17.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jest": "^21.7.0",
     "jest": "^22.1.4",
+    "regenerator-runtime": "^0.11.1",
     "rollup": "^0.55.3",
+    "rollup-plugin-babel": "^3.0.3",
     "rollup-plugin-node-resolve": "^3.0.2",
     "rollup-plugin-replace": "^2.0.0",
-    "@babel/core": "^7.0.0-beta.39",
-    "regenerator-runtime": "^0.11.1"
+    "rollup-plugin-uglify": "^3.0.0"
   },
   "jest": {
     "verbose": true,
-    "modulePaths": ["src"],
+    "modulePaths": [
+      "src"
+    ],
     "roots": [
       "tests"
     ],
     "collectCoverage": true,
-    "coverageFormats": ["json", "html"]
+    "coverageReporters": [
+      "json",
+      "html"
+    ]
   }
 }
