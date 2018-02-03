@@ -59,6 +59,7 @@ function validateSettings (settings) {
 
 /**
  * It creates and returns a new instance of a logger
+ * @param {Number} defaultLevel The default level of your loggin
  * @param {Object} settings A number of settings to initialise your logger
  */
 export function createLogger (defaultLevel, settings) {

@@ -1,4 +1,4 @@
-const DEFAULT_CURRENT_LEVEL = 2;
+const DEFAULT_CURRENT_LEVEL = 3;
 const NOOP = function () {}
 
 export function Logger (newCurrentLevel, levels) {
