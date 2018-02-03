@@ -1,5 +1,5 @@
 {
-  "name": "easy-log",
+  "name": "@ematipico/easy-log",
   "version": "1.0.0",
   "description": "Easy and pluggable logger",
   "main": "src/index.js",
