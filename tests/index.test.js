@@ -9,7 +9,7 @@ describe('createLogger', () => {
 
   it('returns a logger that has a default level', () => {
     const l = createLogger()
-    expect(l.level).toEqual(2)
+    expect(l.level).toEqual(3)
   })
 
   it('throws if levels keys are not numbers', () => {
@@ -70,18 +70,6 @@ describe('createLogger', () => {
         name: 'test',
         fn: () => {},
         pure: 'wweee'
-      }
-    }
-
-    expect(() => createLogger(1, c)).toThrowErrorMatchingSnapshot()
-  })
-
-  it('throws if the pure is false but the function specificed does not return a new function', () => {
-    const c = {
-      1: {
-        name: 'test',
-        fn: () => {},
-        pure: false
       }
     }
 
@@ -168,15 +156,22 @@ describe('createLogger', () => {
   })
 
   it('it handles non-pure functions, that allow to return functions to use', () => {
-    const nonPureFunc = (first) => (second) => {
-      expect(first).toEqual('ehy')
-      expect(second).toEqual('second')
+
+    const nonPureFunc = function (label) {
+      const myLabel = label + ' manipulated';
+      return function (second) {
+        expect(myLabel).toEqual('ehy manipulated')
+        expect(second).toEqual('second')
+        expect(label).toEqual('ehy')
+      }
     }
 
     const customConfiguration = {
       1: {
         name: 'boo',
-        fn: nonPureFunc,
+        fn: function (label) {
+          return nonPureFunc(label)
+        }, 
         pure: false
       }      
     }

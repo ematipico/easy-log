@@ -40,12 +40,6 @@ function validateSettings (settings) {
       if (typeof info.pure !== 'boolean') {
         throw new Error('The pure parameter for ' + info.name + ' must be a boolean')        
       }
-      if (info.pure === false) {
-        const res = info.fn()
-        if (typeof res !== 'function') {
-          throw new Error('You function for your level ' + info.name  + ' is not returning a new function')
-        }
-      }
     }
     if (typeof info.prefix !== 'undefined') {
       if (typeof info.prefix !== 'string') {
@@ -59,8 +53,14 @@ function validateSettings (settings) {
 
 /**
  * It creates and returns a new instance of a logger
+ * 
  * @param {Number} defaultLevel The default level of your loggin
  * @param {Object} settings A number of settings to initialise your logger
+ * @param {String} settings.name The name of the function that will execture
+ * @param {Function} settings.fn The function that will executed when you will call the '.name'
+ * @param {String} settings.prefix A string that will be prepended to your log
+ * @param {Boolean} settings.pure Optional. When your function has to return a new function. 
+ * That's useful if you want integrate it with another library such as `debug`
  */
 export function createLogger (defaultLevel, settings) {
   if (process.env.NODE_ENV !== 'production') {
