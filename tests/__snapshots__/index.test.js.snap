@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createLogger throws if levels keys are not numbers 1`] = `"Levels must be numbers"`;
+
+exports[`createLogger throws if prefix is not a string 1`] = `"The prefix for test must be a string"`;
+
+exports[`createLogger throws if the fn is not set or is not a function 1`] = `"The name must be a string and it is mandatory"`;
+
+exports[`createLogger throws if the fn is not set or is not a function 2`] = `"The fn must be a function and it is mandatory"`;
+
+exports[`createLogger throws if the name is not a string 1`] = `"The name must be a string and it is mandatory"`;
+
+exports[`createLogger throws if the name is not a string 2`] = `"The name must be a string and it is mandatory"`;
+
+exports[`createLogger throws if the pure is false but the function specificed does not return a new function 1`] = `"You function for your level test is not returning a new function"`;
+
+exports[`createLogger throws if the pure parameter is not a boolean 1`] = `"The pure parameter for test must be a boolean"`;
