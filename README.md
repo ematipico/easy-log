@@ -3,17 +3,20 @@
 ## Simple, combustible and pluggable logger for browser
 
 With easy log, you can have your own logger and add all the functions that you want.
-You can set log levels, fallbacks and so one. 
+You can set log levels, fallbacks and so one.
 
 At the end the logger is just a function that modify itself based on your needs
 
 ### Installation
 
 With `npm`
+
 ```bash
 npm i --save @ematipico/easy-log
 ```
+
 With `yarn`
+
 ```bash
 yarn add @ematipico/easy-log
 ```
@@ -63,7 +66,7 @@ Let's see what's inside the settings object.
 | Parameter | Type | Description |
 | ----------|------|-------------|
 | `name` | `String` | The name of your function |
-| `fn` | `Function` | The function that will be execture once you will call .name | 
+| `fn` | `Function` | The function that will be execture once you will call .name |
 | `prefix` | `String` | A string that will be preprended to your log |
 | `pure` | `Boolean` | When it's `false`, your function will have to return a new function. Useful to integrate with third party libraries, such as `debug` |
 

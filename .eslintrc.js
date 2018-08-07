@@ -5,6 +5,7 @@ module.exports = {
         "import"
     ],
     "env": {
-        "browser": true
+        "browser": true,
+        node: true
     }
 };

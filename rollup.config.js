@@ -1,7 +1,7 @@
 import nodeResolve from 'rollup-plugin-node-resolve'
 import babel from 'rollup-plugin-babel'
 import replace from 'rollup-plugin-replace'
-import uglify from 'rollup-plugin-uglify'
+import {uglify} from 'rollup-plugin-uglify'
 
 const env = process.env.NODE_ENV // eslint-disable-line
 const config = {
@@ -19,8 +19,7 @@ if (env === 'es' || env === 'cjs') {
 }
 
 if (env === 'development' || env === 'production') {
-  config.output = { format: 'umd' }
-  config.name = 'Easy log'
+  config.output = { format: 'umd', name: 'Easy log' }
   config.plugins.push(
     nodeResolve({
       jsnext: true

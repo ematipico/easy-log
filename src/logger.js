@@ -25,24 +25,32 @@ function installLevels (loggerInstance) {
 
     const levelNumbers = Object.keys(levels)
     levelNumbers.forEach(level => {
-      const logLevelInformation = levels[level]
-      const isPure = logLevelInformation.pure === true
+      const logLevelInformation = levels[level]      
+      const isPure = typeof logLevelInformation.pure === 'boolean' ? logLevelInformation.pure === true : true
       let valueForPrototype = isPure ? NOOP : () => NOOP;
       // installing the functions 
       if (level <= currentLevel) {
         valueForPrototype = function () {
           let args = Array.prototype.slice.call(arguments)
-          if (!isPure) {
+          if (isPure === false) {
             const closuredFunc = logLevelInformation.fn.apply(logLevelInformation, args);
             return function () {
-                const args = Array.prototype.slice.call(arguments)
+                let args = Array.prototype.slice.call(arguments)
+                if (typeof logLevelInformation.prefix !== 'undefined') {
+                  args = Array.prototype.concat([], [logLevelInformation.prefix], args)
+                }
+
                 closuredFunc.apply(closuredFunc, args)
             }
           } else {
-            if (logLevelInformation.prefix) {
-              args = Array.prototype.concat([], [logLevelInformation.prefix], args)
+            if (typeof logLevelInformation.prefix !== 'undefined') {
+              const newArgs =  Array.prototype.concat([], [logLevelInformation.prefix], args)
+              logLevelInformation.fn.apply(logLevelInformation, newArgs)            
+
+            } else {
+              logLevelInformation.fn.apply(logLevelInformation, args)            
+
             }
-            logLevelInformation.fn.apply(logLevelInformation, args)            
           }
         }
       }
